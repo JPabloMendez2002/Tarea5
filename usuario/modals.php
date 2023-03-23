@@ -217,9 +217,10 @@
 
                         <hr>
                     </div>
-                    <div id="FormNTelefono" tyle="display: none;">
-                        <input type="text" id="idTelefonoAgrega">
+                    <div id="divInputs" tyle="display: none;">
+                
                     </div>
+                    <br>
                     <table class="table table-secondary table-hover table-bordered text-md-center" id="tablaTelefonos" style="display: none;">
                         <thead class="table-primary">
                             <tr>
@@ -259,9 +260,15 @@
                 <div class="table-responsive-xl">
                     <div class="text-center">
                         <button class='btn btn-secondary' id='btnCargaCorreos' name='btnCargaCorreos'>Cargar E-Mails</button>
+                        <button class='btn btn-success' id='btnAgregaCorreos' name='btnAgregaCorreos'>Agregar E-Mail</button>
+
                         <hr>
                     </div>
 
+                    <div id="divInputsCorreos" tyle="display: none;">
+                
+                    </div>
+                    <br>
                     <table class="table table-secondary table-hover table-bordered text-md-center" id="tablaCorreos" style="display: none;">
                         <thead class="table-primary">
                             <tr>

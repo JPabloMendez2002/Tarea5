@@ -156,47 +156,68 @@ $(document).ready(function () {
   $("#btnAgregarTelefono").click(function (e) {
     e.preventDefault();
     let id = $(this).attr("data-id");
+
     $.ajax({
       type: "GET",
       url: ` http://127.0.0.1:8000/api/contactos/telefonos/${id}`,
       success: function (response) {
         $("#FormNTelefono").show("slow");
-        for (let i = 0; i < 1 ; i++) {
-          $("#idTelefonoAgrega").append(`${JSON.stringify(response[i].IdContacto)}`
-          );
+        for (let i = 0; i < 1; i++) {
+          $("#divInputs").append(`
+
+          <div class="row">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Telefono" id="telnuevo" name="telnuevo" />
+                </div>
+                <div class="col-md-3">
+                <button type='button' class="btn btn-success" onclick=\"
+                $.ajax({type: 'POST', url: 'http://127.0.0.1:8000/api/telefonos'
+                ,data:{
+                    IdContacto: ${response[i].IdContacto},
+                    Telefono: '12345678',
+                },success: function(response){Swal.fire('Exito','Se agrego el teléfono correctamente.','success'); setTimeout(function(){location.reload();},2000)}});\"><i class="fa-solid fa-check"></i></button>
+        
+            </div>
+          </div>
+        `);
         }
       },
     });
   });
 
 
-  window.agregarTelefono = function () {
-    $("#btnNuevoTelefono").click(function () {
-      $.ajax({
-        type: "POST",
-        url: `http://127.0.0.1:8000/api/contactos`,
-  
-        data: {
-          IdUsuario: 4,
-          Nombre: $("#nombreC").val(),
-          Apellidos: $("#apellidosC").val(),
-          Correo: $("#correoC").val(),
-          Telefono: $("#telefonoC").val(),
-          Facebook: $("#linkFACE").val(),
-          Instagram: $("#linkINSTA").val(),
-          Twitter: $("#linkTWEET").val(),
-        },
-  
-        success: function (response) {
-          Swal.fire("Exito", "Se agrego correctamente el contacto.", "success");
-          setTimeout(function () {
-            location.reload();
-          }, 2000);
-        },
-      });
+  $("#btnAgregaCorreos").click(function (e) {
+    e.preventDefault();
+    let id = $(this).attr("data-id");
+
+    $.ajax({
+      type: "GET",
+      url: ` http://127.0.0.1:8000/api/contactos/correos/${id}`,
+      success: function (response) {
+        $("#FormNCorreos").show("slow");
+        for (let i = 0; i < 1; i++) {
+          $("#divInputsCorreos").append(`
+
+          <div class="row">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="E-Mail"/>
+                </div>
+                <div class="col-md-3">
+                <button type='button' class="btn btn-success" onclick=\"
+                $.ajax({type: 'POST', url: 'http://127.0.0.1:8000/api/correos'
+                ,data:{
+                    IdContacto: ${response[i].IdContacto},
+                    Correo: 'soporte@spestechnical.com',
+                },success: function(response){Swal.fire('Exito','Se agrego el E-Mail correctamente.','success'); setTimeout(function(){location.reload();},2000)}});\"><i class="fa-solid fa-check"></i></button>
+        
+            </div>
+          </div>
+        `);
+        }
+      },
     });
-  };
-  
+  });
+
 
   $("#btnCargaCorreos").click(function (e) {
     e.preventDefault();
@@ -214,9 +235,8 @@ $(document).ready(function () {
         
                 <td>${response[i].Correo}</td>
                 <td style='text-align: center;'>
-                    <button type='button' class="btn btn-warning" data-bs-toggle='modal' data-bs-target='#editarUSUARIO'><i class="fa-solid fa-pen-to-square fa-bounce"></i></button>
+                <button type='button' class="btn btn-danger" onclick=\"$.ajax({type: 'DELETE', url: 'http://127.0.0.1:8000/api/correos/${response[i].IdCorreo}',success: function(response){Swal.fire('Exito','Se elimino el E-Mail correctamente.','success'); setTimeout(function(){location.reload();},2000)}});\"><i class="fa-solid fa-trash fa-shake"></i></button>
                 </td>
-        
             </tr>`);
         }
       },
@@ -264,9 +284,15 @@ $(document).ready(function () {
                                       \" class='btn btn-primary'>Teléfono(s) <i class='fa-solid fa-phone'></i></button>
                                 </h4>
                                 <h4>
-                                    <button type='button' data-bs-toggle='modal' data-bs-target='#modalCorreos' onclick=\" $('#btnCargaCorreos').attr('data-id', ${
+                                    <button type='button' data-bs-toggle='modal' data-bs-target='#modalCorreos' onclick=\" 
+                                    $('#btnCargaCorreos').attr('data-id', ${
                                       response[i].IdContacto
-                                    });\" class='btn btn-dark'>E-Mail(s) <i class="fa-solid fa-envelope"></i></button>
+                                    });
+                                    
+                                    $('#btnAgregaCorreos').attr('data-id', ${
+                                        response[i].IdContacto
+                                      });
+                                    \" class='btn btn-dark'>E-Mail(s) <i class="fa-solid fa-envelope"></i></button>
                                 </h4>
                             </div>
                         </div>
@@ -345,10 +371,11 @@ window.editarContacto = function (contacto) {
         Facebook: $("#linkFACED").val(),
         Twitter: $("#linkTWEETD").val(),
       },
+
       success: function (response) {
         Swal.fire(
           "Exito",
-          "Se actualizó el contacto correctamente.",
+          "Se actualizo correctamente el contacto.",
           "success"
         );
         setTimeout(function () {
@@ -369,18 +396,11 @@ window.eliminarContacto = function (contacto) {
       data: {
         IdContacto: $("#idContactoBorrar").val(),
       },
-      success: function (data) {
-        var mensaje = JSON.parse(data);
-        Swal.fire({
-          title: "Éxito",
-          text: mensaje,
-          icon: "success",
-          confirmButtonText: "OK",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            location.reload();
-          }
-        });
+      success: function (response) {
+        Swal.fire("Exito", "Se elimino correctamente el contacto.", "success");
+        setTimeout(function () {
+          location.reload();
+        }, 2000);
       },
     });
   });
