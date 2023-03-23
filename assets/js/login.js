@@ -13,22 +13,16 @@ $(document).ready(function () {
       url: "http://127.0.0.1:8000/api/login",
       data: { Identificacion: user, Contrasena: pass },
       success: function (response) {
-        tipoususario = JSON.stringify(response["TipoUsuario"]);
 
-        if (Object.values(response) == "Identificacion y/o contraseña incorrectos") {
-          $("#contrasena").show("slow");
+        if ((response['Usuario'] = "Tipo1")) {
+          window.location.href = `./usuario/home.php?id=${response['ID']}`;
         } else {
-          if ((tipoususario = "Usuario")) {
-            window.location.href = "./usuario/home.php";
-          } else {
-            console.log(tipoususario);
-            window.location.href = "./admin/home.php";
-          }
+          window.location.href = `./admin/home.php?id=${response['ID']}`;
         }
       },
     }).fail(function (errorThrown) {
-      if (errorThrown.status == 400) {
-        $("#validaciones").show("slow");
+      if (errorThrown.status == 404) {
+        $("#mensajelogin").show("slow");
       }
     });
   });

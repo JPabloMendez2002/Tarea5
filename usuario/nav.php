@@ -14,7 +14,12 @@
                     <a class="nav-link" href="perfil.php">Perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contactos.php">Contactos</a>
+                    <a class="nav-link" onclick="
+                    let queryString = window.location.search;
+                    let params = new URLSearchParams(queryString);
+                    let id = params.get('id'); 
+                    
+                    window.location.href=`./contactos.php?id=${id}`">Contactos</a>
                 </li>
 
             </ul>

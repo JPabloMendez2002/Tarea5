@@ -12,7 +12,7 @@
 
 <body>
     <?php
-    require('nav.php')
+    require('nav.php');
     ?>
     <div class="container-fluid p-5 text-white text-center" style="background-color: #081e4d;">
         <a class="navbar-brand" href="#"><img src="http://www.cuc.ac.cr/app/cms/www/images/logo_cuc.png" width="100px" /></a>
@@ -22,6 +22,7 @@
     <?php
     require('../footer.php')
     ?>
+
 </body>
 
 </html>

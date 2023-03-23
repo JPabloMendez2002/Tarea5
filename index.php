@@ -62,8 +62,8 @@
                                     <strong>Identificacion y/o contraseña incorrectos</strong>
                                 </div>
 
-                                <div class="alert alert-success text-center" id="login" style="display:none;">
-                                    <strong id="mensaje"></strong>
+                                <div class="alert alert-danger text-center" id="mensajelogin" style="display:none;">
+                                    <strong>Identificacion y/o contraseña incorrectos</strong>
                                 </div>
                             </form>
 
