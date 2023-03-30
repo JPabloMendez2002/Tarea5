@@ -24,7 +24,7 @@
                                 <h4>Teléfono</h4>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
-                                    <input type="text" class="form-control" id="telefonoC" name="telefonoC" placeholder="Teléfono principal">
+                                    <input type="number" class="form-control" id="telefonoC" name="telefonoC" placeholder="Teléfono principal">
                                 </div>
                             </div>
                             <div class="col-md">

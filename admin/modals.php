@@ -53,7 +53,7 @@
                            <hr>
 
                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar <i class="fa-solid fa-rectangle-xmark"></i></button>
-                           <button type="submit" class="btn btn-success" id="btnNuevoUsuario">Guardar <i class="fa-solid fa-floppy-disk"></i></button>
+                           <button type="button" class="btn btn-success" id="btnNuevoUsuario">Guardar <i class="fa-solid fa-floppy-disk"></i></button>
                        </form>
 
                    </div>
@@ -62,45 +62,6 @@
        </div>
    </div>
    <!----------------------------------FIN MODAL AGREGAR USUARIO----------------------------------------------------------->
-
-   <!----------------------------------MODAL EDITAR PASSWORD------------------------------------------->
-   <div class="modal fade" id="editarCONTACTPASS">
-       <div class="modal-dialog modal-dialog-centered">
-           <div class="modal-content">
-               <!-- Modal Header -->
-               <div class="modal-header">
-                   <center>
-                       <h2 class="modal-title">Cambiar Contraseña
-                           <span>
-                               <i class="fa-duotone fa-key"></i></span>
-                       </h2>
-                   </center>
-                   <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-               </div>
-
-               <!-- Modal body -->
-               <div class="modal-body">
-                   <form action="../actulizarContrasenaUsuario" method="POST">
-                       <div class="row">
-                           <div class="col">
-                               <input type="hidden" name="idUsuarioEditPass" id="idUsuarioEditPass">
-                               <input type="password" class="form-control Inputs" id="contraEDU1" name="contraEDU1" placeholder="Contraseña Nueva" />
-                           </div>
-                           <div class="col">
-                               <input type="password" class="form-control Inputs" id="contraEDU2" name="contraEDU2" placeholder="Repita la contraseña" />
-                           </div>
-                       </div>
-                       <hr>
-                       <center>
-                           <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="cambiarcontraSAD" value="Enviar">Cambiar <i class="fa-sharp fa-solid fa-circle-check"></i></button>
-                       </center>
-                   </form>
-               </div>
-               <!--MODAL BODY-->
-           </div>
-       </div>
-   </div>
-   <!----------------------------------FIN EDITAR PASSWORD------------------------------------------->
 
    <!----------------------------------MODAL EDITAR USUARIO----------------------------------------------------------->
    <div class="modal fade" id="editarUSUARIO">
@@ -150,7 +111,7 @@
                            </div>
                            <hr>
                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar <i class="fa-solid fa-rectangle-xmark"></i></button>
-                           <button type="submit" id="btnActUsuario" name="btnActUsuario" class="btn btn-success" data-bs-dismiss="modal">Guardar <i class="fa-solid fa-floppy-disk"></i></button>
+                           <button type="button" id="btnActUsuario" name="btnActUsuario" class="btn btn-success" data-bs-dismiss="modal">Guardar <i class="fa-solid fa-floppy-disk"></i></button>
                        </form>
                    </div>
                </div>
@@ -174,7 +135,7 @@
                    </div>
                    <div class="modal-footer">
                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar <i class="fa-solid fa-rectangle-xmark"></i></button>
-                       <button type="submit" class="btn btn-success" data-bs-dismiss="modal" id="btneliminaUsu" name="btneliminaUsu">Confirmar <i class="fa-solid fa-square-check"></i></button>
+                       <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="btneliminaUsu" name="btneliminaUsu">Confirmar <i class="fa-solid fa-square-check"></i></button>
                    </div>
                </form>
            </div>

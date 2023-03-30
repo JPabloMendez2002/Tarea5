@@ -7,20 +7,32 @@
         <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="home.php">Inicio</a>
+                <a class="nav-link" onclick="
+                    let queryString3 = window.location.search;
+                    let params3 = new URLSearchParams(queryString3);
+                    let id3 = params3.get('id'); 
+                    window.location.href=`./home.php?id=${id3}`">Inicio</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="perfil.php">Perfil</a>
+                <a class="nav-link" onclick="
+                    let queryString2 = window.location.search;
+                    let params2 = new URLSearchParams(queryString2);
+                    let id2 = params2.get('id'); 
+                    window.location.href=`./perfil.php?id=${id2}`">Perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="usuarios.php">Usuarios</a>
+                <a class="nav-link" onclick="
+                    let queryString = window.location.search;
+                    let params = new URLSearchParams(queryString);
+                    let id = params.get('id'); 
+                    window.location.href=`./usuarios.php?id=${id}`">Usuarios</a>
                 </li>
 
 
             </ul>
             <form class="d-flex">
-                <a href="#">
+                <a href="index.php">
                     <button class="btn" style="background-color: #f7323f; color:white;" type="button">Cerrar Sesión <i class="fa-solid fa-right-from-bracket"></i></button>
                 </a>
             </form>

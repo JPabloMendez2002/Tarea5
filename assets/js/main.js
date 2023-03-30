@@ -49,19 +49,19 @@ $(document).ready(function () {
           Apellidos: $("#apellidos").val(),
           Estado: $("#estado").val(),
         },
-        success: function (data) {
-          var mensaje = JSON.parse(data);
-          Swal.fire({
-            title: "Éxito",
-            text: mensaje,
-            icon: "success",
-            confirmButtonText: "OK",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              location.reload();
-            }
-          });
+        success: function (response) {
+          Swal.fire("Exito", "Se agrego correctamente el Usuario.", "success");
+          setTimeout(function () {
+            location.reload();
+          }, 2000);
         },
+      }).fail(function (errorThrown) {
+        if (errorThrown.status == 400) {
+          Swal.fire("Advertencia!", "Complete los espacios vacíos.", "warning");
+        } else if (errorThrown.status == 409) {
+          Swal.fire("Error!", `Ya existe un usuario con la Identificación ${$("#identificacion").val()}.`, "error");
+        
+        }
       });
     });
   };
@@ -82,19 +82,19 @@ $(document).ready(function () {
           Apellidos: $("#apellidoED").val(),
           Estado: $("#estadoED").val(),
         },
-        success: function (data) {
-          var mensaje = JSON.parse(data);
-          Swal.fire({
-            title: "Éxito",
-            text: mensaje,
-            icon: "success",
-            confirmButtonText: "OK",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              location.reload();
-            }
-          });
+        success: function (response) {
+          Swal.fire("Exito", "Se actualizaron los datos correctamente.", "success");
+          setTimeout(function () {
+            location.reload();
+          }, 2000);
         },
+      }).fail(function (errorThrown) {
+        if (errorThrown.status == 400) {
+          Swal.fire("Advertencia!", "Complete los espacios vacíos.", "warning");
+        } else if (errorThrown.status == 404) {
+          Swal.fire("Error!", `No se encontro un Usuario con ID ${usuario.IdUsuario}.`, "error");
+        
+        }
       });
     });
   };
@@ -109,22 +109,20 @@ $(document).ready(function () {
         data: {
           IdUsuario: $("#idUsuarioBorrar").val(),
         },
-        success: function (data) {
-          var mensaje = JSON.parse(data);
-          Swal.fire({
-            title: "Éxito",
-            text: mensaje,
-            icon: "success",
-            confirmButtonText: "OK",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              location.reload();
-            }
-          });
+        success: function (response) {
+          Swal.fire("Exito", "Se elimino correctamente el Usuario.", "success");
+          setTimeout(function () {
+            location.reload();
+          }, 2000);
         },
-      });
+      }).fail(function (errorThrown) {
+        if (errorThrown.status == 500) {
+          Swal.fire("Error!", `El usuario con ID ${usuario.IdUsuario} no se puede eliminar por que tiene registros enlazados a otra tabla`, "error");
+        } 
+      });;
     });
   };
+  
 
   /*-----------------------------------------------------------------------------FIN ADMIN*/
   /*-----------------------------------------------------------------------------USUARIO*/
@@ -171,11 +169,24 @@ $(document).ready(function () {
                 </div>
                 <div class="col-md-3">
                 <button type='button' class="btn btn-success" onclick=\"
+                var telefono = $('#telnuevo').val();
+
                 $.ajax({type: 'POST', url: 'http://127.0.0.1:8000/api/telefonos'
                 ,data:{
                     IdContacto: ${response[i].IdContacto},
-                    Telefono: '12345678',
-                },success: function(response){Swal.fire('Exito','Se agrego el teléfono correctamente.','success'); setTimeout(function(){location.reload();},2000)}});\"><i class="fa-solid fa-check"></i></button>
+                    Telefono: telefono,
+                },success: function(response){
+                  Swal.fire('Exito','Se agrego el teléfono correctamente.','success'); 
+                  setTimeout(function(){
+                    location.reload();
+                  },2000)}
+                }).fail(function (errorThrown) {
+                  if (errorThrown.status == 404) {
+                    Swal.fire('Error!', 'No se encontro un contacto con este ID.', 'error');
+                  } else if (errorThrown.status == 400) {
+                    Swal.fire('Advertencia!', 'Complete los espacios vacíos.', 'warning');
+                  }
+                });;\"><i class="fa-solid fa-check"></i></button>
         
             </div>
           </div>
@@ -200,15 +211,33 @@ $(document).ready(function () {
 
           <div class="row">
                 <div class="col-md-3">
-                    <input type="text" class="form-control" placeholder="E-Mail"/>
+                    <input type="text" class="form-control" placeholder="E-Mail" id="mailNuevo"/>
                 </div>
                 <div class="col-md-3">
                 <button type='button' class="btn btn-success" onclick=\"
+                 var correo = $('#mailNuevo').val();
+                 let expReg = /^[a-z0-9!#$%&'*+/=?^_'{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_'{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+                 let valido = expReg.test(correo);
+                 if (valido == true) {
                 $.ajax({type: 'POST', url: 'http://127.0.0.1:8000/api/correos'
                 ,data:{
                     IdContacto: ${response[i].IdContacto},
-                    Correo: 'soporte@spestechnical.com',
-                },success: function(response){Swal.fire('Exito','Se agrego el E-Mail correctamente.','success'); setTimeout(function(){location.reload();},2000)}});\"><i class="fa-solid fa-check"></i></button>
+                    Correo: correo,
+                },success: function(response){
+                  Swal.fire('Exito','Se agrego el E-Mail correctamente.','success'); 
+                  setTimeout(function(){location.reload();
+                  },2000)}
+                  }).fail(function (errorThrown) {
+                    if (errorThrown.status == 404) {
+                      Swal.fire('Error!', 'No se encontro un contacto con este ID.', 'error');
+                    } else if (errorThrown.status == 400) {
+                      Swal.fire('Advertencia!', 'Complete los espacios vacíos.', 'warning');
+                    }
+                  });
+                  
+                } else {
+                  Swal.fire('Advertencia!', 'Ingrese una dirección de correo electrónico @ válida.', 'warning');
+              };\"><i class="fa-solid fa-check"></i></button>
         
             </div>
           </div>
@@ -328,12 +357,15 @@ $(document).ready(function () {
 
 window.agregarContacto = function () {
   $("#btnNuevoContacto").click(function () {
+    let queryString2 = window.location.search;
+    let params2 = new URLSearchParams(queryString2);
+    let id2 = params2.get('id');
     $.ajax({
       type: "POST",
       url: `http://127.0.0.1:8000/api/contactos`,
 
       data: {
-        IdUsuario: 4,
+        IdUsuario: id2,
         Nombre: $("#nombreC").val(),
         Apellidos: $("#apellidosC").val(),
         Correo: $("#correoC").val(),
@@ -349,7 +381,13 @@ window.agregarContacto = function () {
           location.reload();
         }, 2000);
       },
-    });
+    }).fail(function (errorThrown) {
+      if (errorThrown.status == 404) {
+        Swal.fire("Error!", "No se encontro un Usuario con este ID.", "error");
+      } else if (errorThrown.status == 400) {
+        Swal.fire("Advertencia!", "Complete los espacios vacíos.", "warning");
+      }
+    });;
   });
 };
 
@@ -382,7 +420,13 @@ window.editarContacto = function (contacto) {
           location.reload();
         }, 2000);
       },
-    });
+    }).fail(function (errorThrown) {
+      if (errorThrown.status == 404) {
+        Swal.fire("Error!", "No se encontro un Contacto con este ID.", "error");
+      } else if (errorThrown.status == 400) {
+        Swal.fire("Advertencia!", "Complete los espacios vacíos.", "warning");
+      }
+    });;;
   });
 };
 
