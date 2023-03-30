@@ -31,7 +31,7 @@
                            </div>
                            <div class="row">
                                <div class="col-md-6">
-                                <h4>Contraseña</h4>
+                                   <h4>Contraseña</h4>
                                    <div class="input-group mb-3">
                                        <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
                                        <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Contraseña">

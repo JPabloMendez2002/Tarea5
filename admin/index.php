@@ -22,7 +22,7 @@
                     <h2 class="heading-section">TI-161 Programación V</h2>
                 </div>
             </div>
-            
+
             <div class="row justify-content-center">
                 <br>
                 <div class="col-md-12 col-lg-10">
