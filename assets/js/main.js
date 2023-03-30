@@ -278,7 +278,7 @@ $(document).ready(function () {
     let id2 = params2.get('id');
     $.ajax({
       type: "GET",
-      url: `http://127.0.0.1:8000/api/contactos/${id2}`,
+      url: ` http://127.0.0.1:8000/api/contactos/individual/${id2}`,
       success: function (response) {
         for (var i = 0; i < response.length; i++) {
           $("#CartaContactos").append(`
