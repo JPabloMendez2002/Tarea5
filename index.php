@@ -39,7 +39,7 @@
                                 <div class="form-group mb-3">
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fa-solid fa-circle-user"></i></span>
-                                        <input type="text" class="form-control" placeholder="Usuario" name="user" id="user">
+                                        <input type="number" class="form-control" placeholder="Usuario" name="user" id="user">
                                     </div>
                                 </div>
 
