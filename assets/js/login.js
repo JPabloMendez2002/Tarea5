@@ -15,7 +15,7 @@ $(document).ready(function () {
       url: "http://127.0.0.1:8000/api/login",
       data: { Identificacion: user, Contrasena: pass },
       success: function (response) {
-        document.cookie = `token=${response["Token"]}; max-age=60;`;
+        document.cookie = `token=${response["Token"]}; max-age=300;`;
 
         window.location.href = `./usuario/home.php?id=${response["ID"]}`;
       },
@@ -42,7 +42,7 @@ $(document).ready(function () {
       url: "http://127.0.0.1:8000/api/login/admin",
       data: { Identificacion: user, Contrasena: pass },
       success: function (response) {
-        document.cookie = `token=${response["Token"]}; max-age=60;`;
+        document.cookie = `token=${response["Token"]}; max-age=300;`;
 
         window.location.href = `home.php?id=${response["ID"]}`;
       },
